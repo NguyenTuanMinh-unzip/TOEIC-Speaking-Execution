@@ -18,11 +18,11 @@ export function ProgressBar({
       : "bg-gradient-to-r from-accent-600 to-accent";
   return (
     <div
-      className={`h-2.5 w-full overflow-hidden rounded-full bg-ink-700/70 ring-1 ring-inset ring-white/[0.04] ${className}`}
+      className={`h-2.5 w-full overflow-hidden rounded-full bg-ink-700 ring-1 ring-inset ring-slate-200 ${className}`}
     >
       <div
         className={`h-full rounded-full ${bar} transition-all duration-700 ease-out`}
-        style={{ width: `${pct}%`, boxShadow: pct > 0 ? "0 0 12px rgba(46,230,176,0.5)" : "none" }}
+        style={{ width: `${pct}%`, boxShadow: pct > 0 ? "0 0 10px rgba(13,139,224,0.4)" : "none" }}
       />
     </div>
   );
@@ -48,11 +48,11 @@ export function ProgressRing({
       <svg width={size} height={size} className="-rotate-90">
         <defs>
           <linearGradient id={gid} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#16c79a" />
-            <stop offset="100%" stopColor="#2ee6b0" />
+            <stop offset="0%" stopColor="#0a6fb3" />
+            <stop offset="100%" stopColor="#0d8be0" />
           </linearGradient>
         </defs>
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#1b2029" strokeWidth={stroke} />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#dde8f3" strokeWidth={stroke} />
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -64,7 +64,7 @@ export function ProgressRing({
           strokeDasharray={c}
           strokeDashoffset={c * (1 - pct)}
           className="transition-all duration-700 ease-out"
-          style={{ filter: pct > 0 ? "drop-shadow(0 0 6px rgba(46,230,176,0.55))" : "none" }}
+          style={{ filter: pct > 0 ? "drop-shadow(0 0 5px rgba(13,139,224,0.45))" : "none" }}
         />
       </svg>
       <div className="absolute inset-0 grid place-items-center text-center">{children}</div>

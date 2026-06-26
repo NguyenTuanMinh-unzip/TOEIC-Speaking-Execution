@@ -6,7 +6,8 @@
       "Bash(node -e \"console.log\\('next', require\\('next/package.json'\\).version\\)\")",
       "Bash(npm run *)",
       "Bash(PORT=3100 npm run start)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(node scripts/gen-icons.mjs)"
     ]
   }
 }

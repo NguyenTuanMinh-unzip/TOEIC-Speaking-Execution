@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { TaskDef, TaskStatus } from "@/lib/types";
 
 const STATUS_META: Record<TaskStatus, { label: string; cls: string }> = {
-  not_started: { label: "Not started", cls: "bg-white/[0.04] text-gray-400 ring-1 ring-inset ring-white/[0.06]" },
+  not_started: { label: "Not started", cls: "bg-slate-100 text-gray-500 ring-1 ring-inset ring-slate-200" },
   in_progress: { label: "In progress", cls: "bg-gold/15 text-gold ring-1 ring-inset ring-gold/25" },
   done: { label: "Done", cls: "bg-accent/15 text-accent ring-1 ring-inset ring-accent/25" },
 };
@@ -25,7 +25,7 @@ export function TaskCard({
 
   return (
     <div
-      className={`card flex items-center gap-4 transition duration-200 hover:-translate-y-0.5 hover:border-white/[0.12] ${
+      className={`card flex items-center gap-4 transition duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-glow-sm ${
         done ? "!border-accent/25" : ""
       }`}
     >
@@ -33,7 +33,7 @@ export function TaskCard({
         className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl text-lg font-black transition ${
           done
             ? "bg-gradient-to-br from-accent to-accent-600 text-ink-950 shadow-glow-sm"
-            : "bg-ink-700 text-gray-400 ring-1 ring-inset ring-white/[0.05]"
+            : "bg-ink-800 text-gray-500 ring-1 ring-inset ring-slate-200"
         }`}
       >
         {done ? "✓" : index + 1}

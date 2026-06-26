@@ -10,15 +10,17 @@ export interface Checkpoint {
   goal: string;
   /** Short target shown on the speaking screen. */
   target: string;
+  /** Numeric sentence target used by the scoring engine. */
+  sentences: number;
 }
 
 export const CHECKPOINTS: Checkpoint[] = [
-  { month: 1, dayStart: 1, dayEnd: 30, goal: "Speak 5 sentences", target: "5 sentences" },
-  { month: 2, dayStart: 31, dayEnd: 60, goal: "Speak 7–10 sentences", target: "7–10 sentences" },
-  { month: 3, dayStart: 61, dayEnd: 90, goal: "Speak 30–60 seconds", target: "30–60 seconds" },
-  { month: 4, dayStart: 91, dayEnd: 120, goal: "Speak 30–60 seconds, fewer pauses", target: "30–60 seconds" },
-  { month: 5, dayStart: 121, dayEnd: 150, goal: "Full TOEIC responses", target: "Full responses" },
-  { month: 6, dayStart: 151, dayEnd: 180, goal: "Full TOEIC responses, exam pace", target: "Full responses" },
+  { month: 1, dayStart: 1, dayEnd: 30, goal: "Speak 5 sentences", target: "5 sentences", sentences: 5 },
+  { month: 2, dayStart: 31, dayEnd: 60, goal: "Speak 7–10 sentences", target: "7–10 sentences", sentences: 8 },
+  { month: 3, dayStart: 61, dayEnd: 90, goal: "Speak 30–60 seconds", target: "30–60 seconds", sentences: 10 },
+  { month: 4, dayStart: 91, dayEnd: 120, goal: "Speak 30–60 seconds, fewer pauses", target: "30–60 seconds", sentences: 10 },
+  { month: 5, dayStart: 121, dayEnd: 150, goal: "Full TOEIC responses", target: "Full responses", sentences: 12 },
+  { month: 6, dayStart: 151, dayEnd: 180, goal: "Full TOEIC responses, exam pace", target: "Full responses", sentences: 12 },
 ];
 
 export function monthForDay(day: number): number {
@@ -27,6 +29,10 @@ export function monthForDay(day: number): number {
 
 export function checkpointForDay(day: number): Checkpoint {
   return CHECKPOINTS[monthForDay(day) - 1];
+}
+
+export function targetSentencesForDay(day: number): number {
+  return checkpointForDay(day).sentences;
 }
 
 // --- Saturday "Full Training Day" sub-tasks --------------------------------

@@ -5,6 +5,7 @@ import { TaskPageShell } from "@/components/TaskPageShell";
 import { Recorder } from "@/components/Recorder";
 import { HintList } from "@/components/TemplateCard";
 import { SpeakButton } from "@/components/SpeakButton";
+import { StuckHelp } from "@/components/StuckHelp";
 import { useCurrentDay, useMounted } from "@/lib/hooks";
 import {
   toeicForDay,
@@ -13,11 +14,16 @@ import {
   ANSWER_HINTS,
   OPINION_HINTS,
 } from "@/lib/toeic-data";
+import {
+  PICTURE_SAMPLE,
+  questionSampleForDay,
+  opinionSampleForDay,
+} from "@/lib/samples";
 
 const SUBTASKS = ["task1", "task2", "task3", "task4"];
 
 function fallbackPicture(label: string): string {
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='520'><rect width='100%' height='100%' fill='#161922'/><text x='50%' y='50%' fill='#3a4150' font-family='sans-serif' font-size='28' text-anchor='middle'>Picture: ${label}</text></svg>`;
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='520'><rect width='100%' height='100%' fill='#e8eef5'/><text x='50%' y='50%' fill='#64788d' font-family='sans-serif' font-size='28' text-anchor='middle'>Picture: ${label}</text></svg>`;
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 }
 
@@ -66,7 +72,14 @@ export default function ToeicPage() {
         </div>
         <p className="rounded-xl bg-ink-800 p-4 text-lg leading-relaxed">{data.readAloud}</p>
         <SpeakButton text={data.readAloud} label="Hear model" rate={0.95} />
-        <Recorder day={day} taskType="toeic" topic="Read Aloud" subTask="task1" onSaved={() => mark("task1")} />
+        <Recorder
+          day={day}
+          taskType="toeic"
+          topic="Read Aloud"
+          subTask="task1"
+          onSaved={() => mark("task1")}
+          score={{ mode: "read", target: data.readAloud }}
+        />
       </section>
 
       {/* Task 2 — Describe a Picture */}
@@ -85,7 +98,15 @@ export default function ToeicPage() {
           }}
         />
         <HintList title="Use these openers" lines={PICTURE_HINTS} />
-        <Recorder day={day} taskType="toeic" topic="Describe Picture" subTask="task2" onSaved={() => mark("task2")} />
+        <StuckHelp lines={PICTURE_SAMPLE} />
+        <Recorder
+          day={day}
+          taskType="toeic"
+          topic="Describe Picture"
+          subTask="task2"
+          onSaved={() => mark("task2")}
+          score={{ mode: "template", templateLines: PICTURE_HINTS, targetSentences: 3 }}
+        />
       </section>
 
       {/* Task 3 — Answer a Question */}
@@ -96,7 +117,15 @@ export default function ToeicPage() {
         </div>
         <p className="rounded-xl bg-ink-800 p-4 text-lg font-semibold">{data.question}</p>
         <HintList title="Hints" lines={ANSWER_HINTS} />
-        <Recorder day={day} taskType="toeic" topic="Answer Question" subTask="task3" onSaved={() => mark("task3")} />
+        <StuckHelp lines={[questionSampleForDay(day)]} />
+        <Recorder
+          day={day}
+          taskType="toeic"
+          topic="Answer Question"
+          subTask="task3"
+          onSaved={() => mark("task3")}
+          score={{ mode: "template", templateLines: ANSWER_HINTS, targetSentences: 3 }}
+        />
       </section>
 
       {/* Task 4 — Express an Opinion */}
@@ -107,7 +136,15 @@ export default function ToeicPage() {
         </div>
         <p className="rounded-xl bg-ink-800 p-4 text-lg font-semibold">{data.opinion}</p>
         <HintList title="Template" lines={OPINION_HINTS} />
-        <Recorder day={day} taskType="toeic" topic="Opinion" subTask="task4" onSaved={() => mark("task4")} />
+        <StuckHelp lines={[opinionSampleForDay(day)]} />
+        <Recorder
+          day={day}
+          taskType="toeic"
+          topic="Opinion"
+          subTask="task4"
+          onSaved={() => mark("task4")}
+          score={{ mode: "template", templateLines: OPINION_HINTS, targetSentences: 3 }}
+        />
       </section>
     </TaskPageShell>
   );

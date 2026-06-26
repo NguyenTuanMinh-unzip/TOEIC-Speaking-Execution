@@ -9,6 +9,8 @@ export interface PronFocus {
   title: string;
   sounds: string[];
   minimalPairs: [string, string][];
+  /** Clean single words to drill one-by-one in the trainer (recognizer-friendly). */
+  practiceWords: string[];
   drill: string[];
 }
 
@@ -20,13 +22,14 @@ const PHASE_1: PronFocus = {
     ["bit", "beat"],
     ["think", "this"],
     ["bath", "father"],
-    ["wan", "want"],
+    ["want", "won't"],
     ["car", "card"],
   ],
+  practiceWords: ["ship", "sheep", "bit", "beat", "think", "this", "three", "mother", "asked", "worked", "needed", "wanted"],
   drill: [
-    "Sit and seat. I sit on the seat.",
+    "I sit on the seat.",
     "Think about this thing with your teeth.",
-    "I wanted, I needed, I worked, I asked. (say every ending)",
+    "I wanted, I needed, I worked, I asked.",
   ],
 };
 
@@ -41,31 +44,31 @@ const PHASE_2: PronFocus = {
     ["vine", "fine"],
     ["leave", "leaf"],
   ],
+  practiceWords: ["sea", "she", "sip", "ship", "save", "safe", "van", "fan", "fine", "vine", "leaf", "leave"],
   drill: [
-    "She sells sea shells by the sea shore.",
-    "Very fine vans drive very far.",
-    "Save the file. Leave the leaf.",
+    "She sells sea shells.",
+    "Very fine vans drive far.",
+    "Save the file and leave the leaf.",
   ],
 };
 
-const REVIEW_POOL: PronFocus[] = [
-  PHASE_1,
-  PHASE_2,
-  {
-    title: "Word Stress & Linking",
-    sounds: ["stress on content words", "link consonant → vowel"],
-    minimalPairs: [
-      ["PREsent (noun)", "preSENT (verb)"],
-      ["an apple", "an_apple"],
-      ["pick it up", "pi-ki-tup"],
-    ],
-    drill: [
-      "I'd like an apple. (link 'an apple')",
-      "Pick it up and put it on. (link every word)",
-      "I REALLY WANT to GO. (stress content words)",
-    ],
-  },
-];
+const REVIEW: PronFocus = {
+  title: "Word Stress & Linking",
+  sounds: ["stress on content words", "link consonant → vowel"],
+  minimalPairs: [
+    ["present", "record"],
+    ["water", "little"],
+    ["important", "comfortable"],
+  ],
+  practiceWords: ["present", "record", "water", "little", "important", "comfortable", "vegetable", "photograph", "computer", "delicious"],
+  drill: [
+    "I'd like an apple.",
+    "Pick it up and put it on.",
+    "I really want to go.",
+  ],
+};
+
+const REVIEW_POOL: PronFocus[] = [PHASE_1, PHASE_2, REVIEW];
 
 /** Pronunciation focus for a given program day. */
 export function pronFocusForDay(day: number): PronFocus {
@@ -74,4 +77,10 @@ export function pronFocusForDay(day: number): PronFocus {
   // Day 21+: rotate through the review pool by week.
   const week = Math.floor((day - 21) / 7);
   return REVIEW_POOL[week % REVIEW_POOL.length];
+}
+
+/** Ordered trainer items: single words first, then short drill sentences. */
+export function practiceItemsForDay(day: number): string[] {
+  const f = pronFocusForDay(day);
+  return [...f.practiceWords, ...f.drill];
 }

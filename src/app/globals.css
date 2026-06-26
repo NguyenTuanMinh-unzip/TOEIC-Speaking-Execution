@@ -7,20 +7,20 @@
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html,
 body {
-  color: #e7eaf0;
-  background-color: #070809;
+  color: #0f2436;
+  background-color: #eaf2fb;
 }
 
-/* Ambient background: a quiet glow at the top, never distracting. */
+/* Ambient background: a soft ocean-blue wash at the top. */
 body {
   background-image:
-    radial-gradient(80% 60% at 50% -10%, rgba(46, 230, 176, 0.10) 0%, rgba(46, 230, 176, 0) 60%),
-    radial-gradient(60% 50% at 100% 0%, rgba(80, 120, 255, 0.06) 0%, rgba(80, 120, 255, 0) 55%);
+    radial-gradient(85% 60% at 50% -8%, rgba(13, 139, 224, 0.12) 0%, rgba(13, 139, 224, 0) 60%),
+    radial-gradient(70% 55% at 100% 0%, rgba(56, 189, 248, 0.10) 0%, rgba(56, 189, 248, 0) 55%);
   background-attachment: fixed;
 }
 
@@ -33,7 +33,7 @@ body {
   height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2a3140;
+  background: #c4d6e6;
   border-radius: 999px;
   border: 2px solid transparent;
   background-clip: padding-box;
@@ -44,21 +44,13 @@ body {
 
 @layer base {
   ::selection {
-    background: rgba(46, 230, 176, 0.25);
+    background: rgba(13, 139, 224, 0.18);
   }
 }
 
 @layer components {
   .card {
-    @apply relative rounded-2xl border border-white/[0.06] bg-ink-850/80 p-5 shadow-card backdrop-blur-sm;
-  }
-  /* Soft top highlight on cards for depth. */
-  .card::before {
-    content: "";
-    @apply pointer-events-none absolute inset-0 rounded-2xl bg-card-grad;
-  }
-  .card > * {
-    @apply relative;
+    @apply rounded-2xl border border-slate-200 bg-white p-5 shadow-card;
   }
 
   .btn,
@@ -68,13 +60,13 @@ body {
     @apply inline-flex select-none items-center justify-center gap-2 rounded-xl px-5 py-3 text-base font-semibold transition-all duration-150 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-40 disabled:active:scale-100;
   }
   .btn-primary {
-    @apply bg-gradient-to-b from-accent to-accent-600 text-ink-950 shadow-glow-sm hover:brightness-105 hover:shadow-glow;
+    @apply bg-gradient-to-b from-accent to-accent-600 text-white shadow-glow-sm hover:brightness-105 hover:shadow-glow;
   }
   .btn-ghost {
-    @apply border border-white/10 bg-white/[0.03] text-gray-200 hover:border-white/20 hover:bg-white/[0.06];
+    @apply border border-slate-200 bg-white text-gray-700 hover:border-slate-300 hover:bg-slate-50;
   }
   .btn-danger {
-    @apply bg-gradient-to-b from-danger to-[#e0364f] text-white hover:brightness-110;
+    @apply bg-gradient-to-b from-danger to-[#c01840] text-white hover:brightness-110;
   }
   .pill {
     @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wide;

@@ -12,12 +12,24 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "TOEIC Speaking Execution",
   description: "180 days. Speak every day. No excuses.",
+  applicationName: "TOEIC Speak",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "TOEIC Speak",
+  },
+  icons: {
+    icon: "/favicon-32.png",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#08090c",
+  themeColor: "#eaf2fb",
   width: "device-width",
   initialScale: 1,
+  maximumScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

@@ -156,6 +156,7 @@ export function ShadowingPlayer({
           topic={script.title}
           subTask={`s${index + 1}`}
           label={`Shadow — sentence ${index + 1}`}
+          score={{ mode: "read", target: sentence }}
         />
       </div>
     </div>

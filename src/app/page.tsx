@@ -33,7 +33,7 @@ export default function Dashboard() {
         <p className="text-[11px] font-medium uppercase tracking-[0.25em] text-accent/80">
           The system begins
         </p>
-        <p className="mt-3 bg-gradient-to-b from-white to-gray-400 bg-clip-text text-7xl font-black text-transparent">
+        <p className="mt-3 bg-gradient-to-b from-accent to-accent-600 bg-clip-text text-7xl font-black text-transparent">
           {left}
         </p>
         <p className="text-gray-400">{left === 1 ? "day" : "days"} until Day 1</p>
@@ -166,7 +166,7 @@ export default function Dashboard() {
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl border border-white/[0.05] bg-white/[0.02] py-3">
+    <div className="rounded-xl border border-slate-200 bg-slate-50 py-3">
       <p className="text-xl font-black">{value}</p>
       <p className="mt-0.5 text-[10px] uppercase tracking-[0.15em] text-gray-500">{label}</p>
     </div>
@@ -175,7 +175,7 @@ function Stat({ label, value }: { label: string; value: string }) {
 
 function InfoCard({ label, value, sub }: { label: string; value: string; sub: string }) {
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-ink-850/70 p-4 transition hover:border-white/[0.12]">
+    <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 transition hover:border-slate-300 hover:shadow-glow-sm">
       <span className="absolute inset-y-0 left-0 w-0.5 bg-accent/40" />
       <p className="text-[10px] uppercase tracking-[0.15em] text-gray-500">{label}</p>
       <p className="mt-1 font-bold leading-tight">{value}</p>

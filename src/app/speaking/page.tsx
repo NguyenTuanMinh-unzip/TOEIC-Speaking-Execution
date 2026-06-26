@@ -5,12 +5,38 @@ import { TaskPageShell } from "@/components/TaskPageShell";
 import { TemplateCard } from "@/components/TemplateCard";
 import { Recorder } from "@/components/Recorder";
 import { RecordingList } from "@/components/RecordingList";
+import { StuckHelp } from "@/components/StuckHelp";
 import { useCurrentDay, useMounted } from "@/lib/hooks";
 import { useStore } from "@/lib/store";
 import { topicForDay, topicRepetition } from "@/lib/topics";
 import { templateForDay } from "@/lib/templates";
-import { checkpointForDay, SATURDAY_TASKS } from "@/lib/plan";
+import { checkpointForDay, SATURDAY_TASKS, targetSentencesForDay } from "@/lib/plan";
+import { topicSampleForDay } from "@/lib/samples";
 import { isSaturday } from "@/lib/date";
+
+const SAT_SAMPLES: Record<string, string[]> = {
+  intro: [
+    "Hello, my name is ... and I am ... years old.",
+    "I live in ... with my family.",
+    "I work as a ... and I usually start at eight.",
+    "In my free time, I like reading and listening to music.",
+    "I am learning English so I can speak more confidently.",
+  ],
+  work: [
+    "I usually work in an office during the week.",
+    "I often start my day by checking email.",
+    "Sometimes I have meetings in the afternoon.",
+    "For example, yesterday I finished a report.",
+    "I like my job because I learn new things.",
+  ],
+  life: [
+    "I usually wake up early and have breakfast.",
+    "I often exercise or take a short walk.",
+    "Sometimes I meet my friends on weekends.",
+    "For example, last weekend I watched a movie.",
+    "I like my daily life because it is simple and calm.",
+  ],
+};
 
 export default function SpeakingPage() {
   const mounted = useMounted();
@@ -83,6 +109,7 @@ export default function SpeakingPage() {
                 )}
               </div>
               <p className="text-sm text-gray-400">{t.prompt}</p>
+              <StuckHelp lines={SAT_SAMPLES[t.id] ?? []} />
               <Recorder
                 day={day}
                 taskType="speaking"
@@ -114,6 +141,8 @@ export default function SpeakingPage() {
 
           <TemplateCard template={template} accent />
 
+          <StuckHelp lines={topicSampleForDay(day)} />
+
           <div>
             <p className="mb-2 text-xs uppercase tracking-widest text-gray-500">
               Record yourself speaking the template (required)
@@ -124,6 +153,11 @@ export default function SpeakingPage() {
               topic={topic.title}
               subTask={template.id}
               onSaved={() => setRefreshKey((k) => k + 1)}
+              score={{
+                mode: "template",
+                templateLines: template.lines,
+                targetSentences: targetSentencesForDay(day),
+              }}
             />
           </div>
         </div>

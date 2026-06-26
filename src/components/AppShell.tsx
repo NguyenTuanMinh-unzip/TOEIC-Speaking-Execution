@@ -6,11 +6,13 @@ import { useEffect } from "react";
 import { useStore } from "@/lib/store";
 import { useCurrentDay } from "@/lib/hooks";
 import { TOTAL_DAYS } from "@/lib/constants";
+import { PWA } from "./PWA";
 
 const NAV = [
   { href: "/", label: "Today", icon: "◎" },
   { href: "/progress", label: "Progress", icon: "▤" },
   { href: "/history", label: "History", icon: "◷" },
+  { href: "/settings", label: "Setup", icon: "⚙" },
 ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -25,6 +27,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="mx-auto flex min-h-screen max-w-2xl flex-col px-4 pb-28 pt-5 sm:px-6">
+      <PWA />
       <header className="mb-6 flex items-center justify-between">
         <Link href="/" className="group flex items-center gap-2.5">
           <span className="relative grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-accent to-accent-600 text-lg font-black text-ink-950 shadow-glow-sm transition group-hover:shadow-glow">
@@ -37,7 +40,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </p>
           </div>
         </Link>
-        <div className="flex items-center gap-2 rounded-2xl border border-white/[0.06] bg-ink-850/70 px-3 py-1.5 text-right backdrop-blur">
+        <div className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-white/70 px-3 py-1.5 text-right backdrop-blur">
           <div>
             <p className="font-mono text-sm font-bold leading-none text-accent">
               DAY {day || "—"}
@@ -51,7 +54,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <main className="flex-1">{children}</main>
 
       <nav className="fixed inset-x-0 bottom-0 z-30 px-4 pb-4">
-        <div className="mx-auto flex max-w-md items-stretch justify-around gap-1 rounded-2xl border border-white/[0.07] bg-ink-900/80 p-1.5 shadow-card backdrop-blur-xl">
+        <div className="mx-auto flex max-w-md items-stretch justify-around gap-1 rounded-2xl border border-slate-200 bg-white/85 p-1.5 shadow-card backdrop-blur-xl">
           {NAV.map((item) => {
             const active =
               item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
@@ -61,7 +64,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 href={item.href}
                 className={`flex flex-1 flex-col items-center gap-0.5 rounded-xl py-2.5 text-[11px] font-semibold transition-all ${
                   active
-                    ? "bg-accent/10 text-accent shadow-[inset_0_0_0_1px_rgba(46,230,176,0.2)]"
+                    ? "bg-accent/10 text-accent shadow-[inset_0_0_0_1px_rgba(13,139,224,0.25)]"
                     : "text-gray-500 hover:text-gray-300"
                 }`}
               >
