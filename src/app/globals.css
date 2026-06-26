@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+html {
+  color-scheme: dark;
+}
+
+html,
+body {
+  color: #e7eaf0;
+  background-color: #070809;
+}
+
+/* Ambient background: a quiet glow at the top, never distracting. */
+body {
+  background-image:
+    radial-gradient(80% 60% at 50% -10%, rgba(46, 230, 176, 0.10) 0%, rgba(46, 230, 176, 0) 60%),
+    radial-gradient(60% 50% at 100% 0%, rgba(80, 120, 255, 0.06) 0%, rgba(80, 120, 255, 0) 55%);
+  background-attachment: fixed;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a3140;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@layer base {
+  ::selection {
+    background: rgba(46, 230, 176, 0.25);
+  }
+}
+
+@layer components {
+  .card {
+    @apply relative rounded-2xl border border-white/[0.06] bg-ink-850/80 p-5 shadow-card backdrop-blur-sm;
+  }
+  /* Soft top highlight on cards for depth. */
+  .card::before {
+    content: "";
+    @apply pointer-events-none absolute inset-0 rounded-2xl bg-card-grad;
+  }
+  .card > * {
+    @apply relative;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-ghost,
+  .btn-danger {
+    @apply inline-flex select-none items-center justify-center gap-2 rounded-xl px-5 py-3 text-base font-semibold transition-all duration-150 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-40 disabled:active:scale-100;
+  }
+  .btn-primary {
+    @apply bg-gradient-to-b from-accent to-accent-600 text-ink-950 shadow-glow-sm hover:brightness-105 hover:shadow-glow;
+  }
+  .btn-ghost {
+    @apply border border-white/10 bg-white/[0.03] text-gray-200 hover:border-white/20 hover:bg-white/[0.06];
+  }
+  .btn-danger {
+    @apply bg-gradient-to-b from-danger to-[#e0364f] text-white hover:brightness-110;
+  }
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wide;
+  }
+  .rise {
+    @apply animate-riseIn;
+  }
+}
