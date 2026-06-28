@@ -5,7 +5,7 @@ import type { TaskDef } from "./types";
 // ---------------------------------------------------------------------------
 
 /** Day 1 of the program. Local date. (29 June 2026 → a Monday.) */
-export const START_DATE = "2026-06-26";
+export const START_DATE = "2026-06-29";
 
 /** Total program length. */
 export const TOTAL_DAYS = 180;
