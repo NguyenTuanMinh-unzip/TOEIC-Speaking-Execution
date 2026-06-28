@@ -12,6 +12,8 @@ export interface PronFocus {
   /** Clean single words to drill one-by-one in the trainer (recognizer-friendly). */
   practiceWords: string[];
   drill: string[];
+  /** Phoneme tip keys (into PHONEME_TIPS) for this focus — fallback guidance. */
+  tipKeys: string[];
 }
 
 const PHASE_1: PronFocus = {
@@ -31,6 +33,7 @@ const PHASE_1: PronFocus = {
     "Think about this thing with your teeth.",
     "I wanted, I needed, I worked, I asked.",
   ],
+  tipKeys: ["ɪ", "iː", "θ", "ð", "endings"],
 };
 
 const PHASE_2: PronFocus = {
@@ -50,6 +53,7 @@ const PHASE_2: PronFocus = {
     "Very fine vans drive far.",
     "Save the file and leave the leaf.",
   ],
+  tipKeys: ["s", "ʃ", "v", "f"],
 };
 
 const REVIEW: PronFocus = {
@@ -66,6 +70,7 @@ const REVIEW: PronFocus = {
     "Pick it up and put it on.",
     "I really want to go.",
   ],
+  tipKeys: ["stress", "endings"],
 };
 
 const REVIEW_POOL: PronFocus[] = [PHASE_1, PHASE_2, REVIEW];

@@ -26,7 +26,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }, [init]);
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-2xl flex-col px-4 pb-28 pt-5 sm:px-6">
+    <div className="mx-auto flex min-h-screen max-w-2xl flex-col px-4 pb-32 pt-5 sm:px-6">
       <PWA />
       <header className="mb-6 flex items-center justify-between">
         <Link href="/" className="group flex items-center gap-2.5">

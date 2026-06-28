@@ -6,6 +6,8 @@ import { Recorder } from "@/components/Recorder";
 import { HintList } from "@/components/TemplateCard";
 import { SpeakButton } from "@/components/SpeakButton";
 import { StuckHelp } from "@/components/StuckHelp";
+import { PronunciationHelp } from "@/components/PronunciationHelp";
+import { pronFocusForDay } from "@/lib/pronunciation";
 import { useCurrentDay, useMounted } from "@/lib/hooks";
 import {
   toeicForDay,
@@ -41,6 +43,7 @@ export default function ToeicPage() {
   }
 
   const data = toeicForDay(day);
+  const focus = pronFocusForDay(day);
   const canComplete = SUBTASKS.every((s) => done.has(s));
 
   function mark(id: string) {
@@ -72,6 +75,7 @@ export default function ToeicPage() {
         </div>
         <p className="rounded-xl bg-ink-800 p-4 text-lg leading-relaxed">{data.readAloud}</p>
         <SpeakButton text={data.readAloud} label="Hear model" rate={0.95} />
+        <PronunciationHelp text={data.readAloud} fallbackTips={focus.tipKeys} />
         <Recorder
           day={day}
           taskType="toeic"

@@ -83,7 +83,7 @@ export function TaskPageShell({
 
       {children}
 
-      <div className="sticky bottom-20 z-20 pt-2">
+      <div className="mt-3 border-t border-slate-200 pt-5">
         {done ? (
           <div className="flex items-center justify-between rounded-xl border border-accent/40 bg-accent-soft px-5 py-4">
             <span className="font-bold text-accent">Task complete ✓</span>

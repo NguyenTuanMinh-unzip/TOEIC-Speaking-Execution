@@ -7,7 +7,10 @@
       "Bash(npm run *)",
       "Bash(PORT=3100 npm run start)",
       "mcp__Claude_Preview__preview_start",
-      "Bash(node scripts/gen-icons.mjs)"
+      "Bash(node scripts/gen-icons.mjs)",
+      "Bash(node scripts/gen-ipa.mjs)",
+      "Bash(node -e ' *)",
+      "Bash(node -e \"const {IPA_DICT}=require\\('./src/lib/ipa-dict.generated.ts'.replace\\('.ts',''\\)\\);\")"
     ]
   }
 }

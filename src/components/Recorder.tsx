@@ -30,6 +30,8 @@ interface RecorderProps {
   onSaved?: () => void;
   /** If set, transcribe the speech and show an accuracy score. */
   score?: ScoreConfig;
+  /** Called with the computed score (when scoring is enabled). */
+  onScored?: (result: ScoreResult) => void;
 }
 
 function fmt(ms: number): string {
@@ -51,6 +53,7 @@ export function Recorder({
   label,
   onSaved,
   score,
+  onScored,
 }: RecorderProps) {
   const registerRecording = useStore((s) => s.registerRecording);
   const refreshCounts = useStore((s) => s.refreshCounts);
@@ -121,7 +124,11 @@ export function Recorder({
           await refreshCounts();
           if (previewUrl) URL.revokeObjectURL(previewUrl);
           setPreviewUrl(URL.createObjectURL(blob));
-          if (scoringOn) setScoreResult(computeScore(transcript, durationMs));
+          if (scoringOn) {
+            const r = computeScore(transcript, durationMs);
+            setScoreResult(r);
+            if (r) onScored?.(r);
+          }
           setPhase("saved");
           onSaved?.();
         } catch {

@@ -47,7 +47,7 @@ export default function PronunciationPage() {
         <p className="mb-2 text-xs font-bold uppercase tracking-widest text-gray-500">
           Practice — read each word, then get a clarity score
         </p>
-        <PronunciationTrainer items={items} day={day} topic={topic.title} />
+        <PronunciationTrainer items={items} day={day} topic={topic.title} fallbackTips={focus.tipKeys} />
       </div>
 
       {/* Minimal pairs reference */}

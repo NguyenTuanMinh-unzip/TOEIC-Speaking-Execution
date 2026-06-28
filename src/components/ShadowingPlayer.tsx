@@ -3,7 +3,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { speak, stopSpeaking, speechSupported } from "@/lib/speech";
 import { REPEATS_PER_SENTENCE, type ShadowScript } from "@/lib/shadowing-data";
+import { pronFocusForDay } from "@/lib/pronunciation";
 import { Recorder } from "./Recorder";
+import { PronunciationHelp } from "./PronunciationHelp";
 
 /** Sentence-by-sentence shadowing: hear the model 5x, then record yourself. */
 export function ShadowingPlayer({
@@ -23,6 +25,7 @@ export function ShadowingPlayer({
 
   const sentence = script.sentences[index];
   const supported = speechSupported();
+  const focusTips = pronFocusForDay(day).tipKeys;
 
   useEffect(() => {
     return () => {
@@ -145,6 +148,8 @@ export function ShadowingPlayer({
           </button>
         </div>
       </div>
+
+      <PronunciationHelp text={sentence} fallbackTips={focusTips} />
 
       <div>
         <p className="mb-2 text-xs uppercase tracking-widest text-gray-500">
